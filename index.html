@@ -1,0 +1,184 @@
+
+<head>
+<title>UCL Doc Search</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<body>
+</body>
+
+
+
+
+<section>
+  <nav>
+  <div class="container">
+  <input placeholder="Search for courses"/>
+</div>
+</nav>
+</section>
+
+<section>
+<div class="container-fluid">
+
+  <div class="row">
+      <div class="col-md-4">
+          <div class="panel panel-default">
+             <div class="panel-heading">This is a Very Long Title That Wraps in 2 Lines</div>
+             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
+                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+             <div class="panel-heading">Title</div>
+             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
+                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+             <div class="panel-heading">Title</div>
+             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
+                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+             <div class="panel-heading">Title</div>
+             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
+                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+             <div class="panel-heading">This is a Very Long Title That Wraps in 2 Lines</div>
+             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
+                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+             <div class="panel-heading">Title</div>
+             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
+                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<style>
+@font-face {
+  font-family: 'Klavika';
+  src: local('Roboto Thin'), local('Roboto-Thin'), url(https://courses.grad.ucl.ac.uk/images/dsdp200.png) format('woff');
+}
+
+*{
+ -webkit-font-smoothing:antialiased;
+ box-sizing: border-box;
+}
+
+body{
+  background:ghostwhite;
+}
+
+.container{
+  width:1440px;
+  height:42px;
+  display:block;
+  background-color:#000000;
+  position:absolute;
+  top:0;left:0;
+}
+
+input{
+  height:32px;
+  width:640px;
+  margin-top:3px;
+  margin-left:10%;
+  background-color:#000000;
+  border:none;
+  font-family:'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
+  font-size:1.2em;
+  font-weight:300;
+  color:white;
+  line-height:24px;
+  position:relative;
+  display:inline-block;
+}
+::-webkit-input-placeholder {
+    color: #cdd9f1;
+}
+:-moz-placeholder {
+    color: #cdd9f1;
+}
+::-moz-placeholder {
+    color: #cdd9f1;
+}
+:-ms-input-placeholder {
+    color: #cdd9f1;
+}
+input:focus{
+  outline:none;
+  content:"";
+}
+:focus::-webkit-input-placeholder { 
+  color: #6779bc; 
+  text-shadow:0 -1px 0 rgba(0, 0, 0, .2);
+  font-size:1em;
+}
+
+#icon{
+  width:21px;
+  height:21px;
+  position:relative;
+  top:5%;
+  left:9.6%;
+  z-index:2;
+  border-box:1px solid black;
+  background:white;
+  border-radius:3px;
+  padding-right:2px;
+  text-align:right;
+  font-size:1.4em;
+  font-family: Klavika, 'lucida grande', 'lucida sans', sans-serif; 
+  font-weight:bold;
+  overflow:hidden;
+  color:#4c66a4;
+  display:inline-block;
+}
+#search{
+  background:url('https://courses.grad.ucl.ac.uk/images/dsdp200.png');
+  background-repeat:no-repeat;
+  width:25px;
+  height:21px;
+  position:relative;
+  display:inline-block;
+  left:7.4%;
+  top:7%;
+  z-index:0;
+  opacity:1;
+}
+
+.container-fluid {
+  margin-top: 80px !important;
+}
+</style>
+
+<script>
+$(function(){
+    $("input").hover(
+        function(){
+            $('#icon').fadeOut(400);
+            $('#search').fadeIn(400);
+        },
+        function(){
+          $('#search').fadeOut(400);
+          $('#icon').fadeIn(400);
+        }
+    );                             
+});
+</script>

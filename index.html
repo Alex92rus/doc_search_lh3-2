@@ -19,56 +19,13 @@
 </section>
 <div class="container-fluid">
   <input type="text" id="search-text" placeholder="search" class="search-box">
-  <button type="button" class="btn btn-primary btn-xs " style="margin: 5px">Search</button>
+  <!-- button type="button" class="btn btn-primary btn-xs " style="margin: 5px">Search</button --!>
 </div>
 <section>
 <div class="container-fluid">
 <h2>Results</h2>
-  <div class="row">
-      <div class="col-md-4">
-          <div class="panel panel-default">
-             <div class="panel-heading">This is a Very Long Title That Wraps in 2 Lines</div>
-             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
-            </div>
-        </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-             <div class="panel-heading">Title</div>
-             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
-            </div>
-        </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-             <div class="panel-heading">Title</div>
-             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
-            </div>
-        </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-             <div class="panel-heading">Title</div>
-             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
-            </div>
-        </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-             <div class="panel-heading">This is a Very Long Title That Wraps in 2 Lines</div>
-             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
-            </div>
-        </div>
-        <div class="col-md-4">
-          <div class="panel panel-default">
-             <div class="panel-heading">Title</div>
-             <div class="panel-body">Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
-            </div>
-        </div>
+    <div id="results" class="row">
     </div>
-</div>
 </section>
 
 </body>
@@ -106,52 +63,29 @@ $(document).ready(function() {
   $('.list-count').text(jobCount + ' items');
     
   
-  $("#search-text").keyup(function () {
-     //$(this).addClass('hidden');
-  
+$("#search-text").keyup(function () {
     var searchTerm = $("#search-text").val();
-    var listItem = $('#list').children('li');
-  
-    
-    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
-    
-      //extends :contains to be case insensitive
-  $.extend($.expr[':'], {
-  'containsi': function(elem, i, match, array)
-  {
-    return (elem.textContent || elem.innerText || '').toLowerCase()
-    .indexOf((match[3] || "").toLowerCase()) >= 0;
-  }
+    $.getJSON( "http://localhost:8000/search/?q=" + searchTerm + "&n=10", function(data){
+        $("#results").empty();
+        for(var i = 0; i < data.length; i ++){
+            var datum =data[i];
+        var template = `
+          <div class="col-md-4">
+              <div class="panel panel-default">
+            <a class="panel-link" href="${datum.url}"><div class="panel-heading">${datum.title}</div></a>
+                 <div class="panel-body">
+                    ${datum.summary.substr(0, 256) + " ..."}
+            </div>
+                </div>
+            </div>
+            `
+           $("#results").append(template);
+        }
+    }
+    );
+
+
 });
-    
-    
-    $("#list li").not(":containsi('" + searchSplit + "')").each(function(e)   {
-      $(this).addClass('hiding out').removeClass('in');
-      setTimeout(function() {
-          $('.out').addClass('hidden');
-        }, 300);
-    });
-    
-    $("#list li:containsi('" + searchSplit + "')").each(function(e) {
-      $(this).removeClass('hidden out').addClass('in');
-      setTimeout(function() {
-          $('.in').removeClass('hiding');
-        }, 1);
-    });
-    
-  
-      var jobCount = $('#list .in').length;
-    $('.list-count').text(jobCount + ' items');
-    
-    //shows empty state text when no jobs found
-    if(jobCount == '0') {
-      $('#list').addClass('empty');
-    }
-    else {
-      $('#list').removeClass('empty');
-    }
-    
-  });
 
   
                   
@@ -198,7 +132,7 @@ $(document).ready(function() {
 .search-box {
   float:left;
   clear:left;
-  width:70%;
+  width:100%;
   padding:0.4em;
   font-size:1em;
   color:#555;
@@ -485,7 +419,7 @@ input:focus{
 }
 
 .container-fluid {
-  margin-top: 80px !important;
+  margin-top: 7rem !important;
 }
 </style>
 

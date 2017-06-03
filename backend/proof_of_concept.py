@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from collections import defaultdict
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 import requests
 import json
 import string
@@ -56,10 +56,10 @@ def evaluate_page(page, f_corpus, query):
     if page["title"] == query:
         search_prio = 1
     for word in query.lower().split():
-        if word in page["title"].lower():
+        if word in page["title"].lower() and word in f_corpus.keys():
             search_prio += 4 * (1/f_corpus[word])
 
-        if word in page["summary"].lower():
+        if word in page["summary"].lower() and word in f_corpus.keys():
             search_prio += 1 * (1/f_corpus[word])
 
     return search_prio
@@ -90,6 +90,10 @@ if __name__ == '__main__':
             @app.route("/search/")
             def search():
                 return jsonify(list(sorted(PAGES, key=lambda page: -evaluate_page(page, CORPUS, request.args.get("q").strip())))[:int(request.args.get("n"))])
+
+            @app.route("/test/")
+            def index():
+                return send_from_directory("..", "index.html")
             app.run("localhost", "8000")
         if command == "quit":
             sys.exit(0)

@@ -61,7 +61,12 @@ while 1:
     command = input("\\ ").strip()
     if command == "search":
         query = input("? ").strip()
-        print(sorted(PAGES, key=lambda page: -evaluate_page(page, None, query))[:20])
+        for i, page in enumerate(sorted(PAGES, key=lambda page: -evaluate_page(page, CORPUS, query))):
+            if i < 20:
+                print("{}: {}".format(page["title"], page["url"]))
+            else:
+                break
+
     if command == "build":
         build_pages(PAGE_LINKS)
         build_corpus(PAGE_LINKS)

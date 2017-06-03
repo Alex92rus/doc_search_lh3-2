@@ -42,6 +42,11 @@ def build_pages(page_links):
     with open("pages.json", "w") as f:
         json.dump(pages, f)
 
+def load_json(filename):
+    with open(filename, "r") as jsonfile:
+        return json.load(jsonfile)
+
+
 def evaluate_page(page, f_corpus, query):
     search_prio = 0
     if page["title"] == query:
@@ -71,9 +76,7 @@ if __name__ == '__main__':
         if command == "build_corpus":
             build_corpus(PAGE_LINKS)
         if command == "load":
-            with open("pages.json", "r") as pages:
-                with open("corpus.json", "r") as corpus:
-                    PAGES, CORPUS = json.load(pages), json.load(corpus)
+            PAGES, CORPUS = load_json("pages.json"), load_json("corpus.json")
 
         if command == "debug":
             print(PAGES[5:10])

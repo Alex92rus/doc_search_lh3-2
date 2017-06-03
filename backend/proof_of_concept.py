@@ -55,26 +55,27 @@ def evaluate_page(page, f_corpus, query):
 
     return search_prio
 
-PAGES = []
-CORPUS = []
-while 1:
-    command = input("\\ ").strip()
-    if command == "search":
-        query = input("? ").strip()
-        print(sorted(PAGES, key=lambda page: -evaluate_page(page, None, query))[:20])
-    if command == "build":
-        build_pages(PAGE_LINKS)
-        build_corpus(PAGE_LINKS)
-    if command == "build_pages":
-        build_pages(PAGE_LINKS)
-    if command == "build_corpus":
-        build_corpus(PAGE_LINKS)
-    if command == "load":
-        with open("pages.json", "r") as pages:
-            with open("corpus.json", "r") as corpus:
-                PAGES, CORPUS = json.load(pages), json.load(corpus)
+if __name__ == '__main__':
+    PAGES = []
+    CORPUS = []
+    while 1:
+        command = input("\\ ").strip()
+        if command == "search":
+            query = input("? ").strip()
+            print(sorted(PAGES, key=lambda page: -evaluate_page(page, None, query))[:20])
+        if command == "build":
+            build_pages(PAGE_LINKS)
+            build_corpus(PAGE_LINKS)
+        if command == "build_pages":
+            build_pages(PAGE_LINKS)
+        if command == "build_corpus":
+            build_corpus(PAGE_LINKS)
+        if command == "load":
+            with open("pages.json", "r") as pages:
+                with open("corpus.json", "r") as corpus:
+                    PAGES, CORPUS = json.load(pages), json.load(corpus)
 
-    if command == "debug":
-        print(PAGES[5:10])
-    if command == "quit":
-        sys.exit(0)
+        if command == "debug":
+            print(PAGES[5:10])
+        if command == "quit":
+            sys.exit(0)

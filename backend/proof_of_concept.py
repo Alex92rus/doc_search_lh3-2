@@ -65,6 +65,10 @@ while 1:
     if command == "build":
         build_pages(PAGE_LINKS)
         build_corpus(PAGE_LINKS)
+    if command == "build_pages":
+        build_pages(PAGE_LINKS)
+    if command == "build_corpus":
+        build_corpus(PAGE_LINKS)
     if command == "load":
         with open("pages.json", "r") as pages:
             with open("corpus.json", "r") as corpus:

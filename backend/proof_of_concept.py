@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from collections import defaultdict
+from flask import Flask, jsonify, request
 import requests
 import json
 import string
@@ -35,7 +36,7 @@ def build_pages(page_links):
         page = {
             "title": web_page.select_one("#maincontent h1").text,
             "url": page_url,
-            "summary": "\n".join(p.text for p in web_page.select("#maincontent p")),
+            "summary": "\n\n".join(p.text for p in web_page.select("#maincontent p")),
         }
         pages.append(page)
         print(page)
@@ -77,5 +78,11 @@ while 1:
 
     if command == "debug":
         print(PAGES[5:10])
+    if command == "runserver":
+        app = Flask(__name__)
+        @app.route("/search/")
+        def search():
+            return jsonify(list(sorted(PAGES, key=lambda page: -evaluate_page(page, CORPUS, request.args.get("q").strip())))[:int(request.args.get("n"))])
+        app.run("localhost", "8000")
     if command == "quit":
         sys.exit(0)

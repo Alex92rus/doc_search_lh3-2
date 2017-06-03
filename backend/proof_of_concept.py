@@ -38,7 +38,7 @@ def build_pages(page_links, max_links=-1):
         page = {
             "title": web_page.select_one("#maincontent h1").text,
             "url": page_url,
-            "summary": "\n".join(p.text for p in web_page.select("#maincontent p")),
+            "summary": "\n\n".join(p.text for p in web_page.select("#maincontent p")),
             "dates" : [p.text for p in web_page.select(".moduleDetails h3")]
         }
         pages.append(page)
